@@ -23,7 +23,7 @@ ENABLE_CHANNELS = {
 
 ALLOWED_ROLES = {"ban": ["admin", "moderadores"]}
 
-BAD_WORDS_FILE = 'bad_words.csv'
+BAD_WORDS_FILENAME = 'bad_words.csv'
 
 intents = Intents.default()
 intents.members = True

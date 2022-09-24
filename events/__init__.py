@@ -1,5 +1,5 @@
 from discord.ext.commands import Bot
-from config import ENABLE_CHANNELS, BAD_WORDS_FILE
+from config import ENABLE_CHANNELS, BAD_WORDS_FILENAME
 
 from helper import validate_word, insert_word
 
@@ -25,7 +25,7 @@ def init(bot: Bot):
          a frase digitada pelo usuário e sendo ela, unica ou composta, e incluir no repositorio de palavras proibidas.
         """
         if splited_message[0] == '--append_bad_word':
-            insert_word(BAD_WORDS_FILE, 'bad_words', ' '.join(splited_message[1:]))
+            insert_word(BAD_WORDS_FILENAME, 'bad_words', ' '.join(splited_message[1:]))
 
             await channel.send('Nova palavra adicionada a lista de bloqueio')
             await bot.process_commands(message)
@@ -38,7 +38,7 @@ def init(bot: Bot):
 
             await validate_messager(current_message, channel)
 
-            valid, err_message = validate_word(BAD_WORDS_FILE, current_message)
+            valid, err_message = validate_word(BAD_WORDS_FILENAME, current_message)
 
             if valid:
                 await message.delete()
