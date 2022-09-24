@@ -45,7 +45,7 @@ async def repository(ctx: discord) -> NoReturn:
         discord.Color.green(),
         url='https://github.com/alexandrealfa/nick_bot',
         author=author,
-        thumb='https://opengraph.githubassets.com/8014b1adfaa7268a0a95a15d163e795ba03a031d4de95932a900cd979f324977/alexandrealfa/nick_bot'
+        image='https://opengraph.githubassets.com/8014b1adfaa7268a0a95a15d163e795ba03a031d4de95932a900cd979f324977/alexandrealfa/nick_bot'
     )
     ebd.generate_embed()
 

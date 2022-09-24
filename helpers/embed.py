@@ -12,7 +12,8 @@ class EmbedHelper:
             url: Union[str, None] = None,
             thumb: Union[str, None] = None,
             fields: Union[list[Dict], None] = None,
-            author: Union[Dict, None] = None
+            author: Union[Dict, None] = None,
+            image: Union[str, None] = None
     ):
         self.title: str = title
         self.color: str = color
@@ -22,6 +23,7 @@ class EmbedHelper:
         self.fields: Union[list[Dict], None] = fields
         self.embed: Union[Ebd, None] = None
         self.author: Union[Dict, None] = author
+        self.image: Union[str, None] = image
 
     def generate_embed(self):
         self.embed = Ebd(title=self.title, color=self.color)
@@ -40,6 +42,9 @@ class EmbedHelper:
 
         if self.fields:
             self.generate_fields()
+
+        if self.image:
+            self.embed.set_image(url=self.image)
 
         return
 
