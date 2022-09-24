@@ -1,7 +1,7 @@
 from discord.ext.commands import Bot
 
 from config import BAD_WORDS_FILENAME, ENABLE_CHANNELS
-from helper import insert_word, validate_word
+from helpers.csv_helper import insert_word, validate_word
 
 
 def init(bot: Bot):
