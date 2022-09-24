@@ -1,0 +1,9 @@
+name, description
+ping, Verifica se o bot está ativo.
+hi, Diga ola ao nick.
+joined, Diz a data que você passou a fazer parte do servidor.
+joined ```@membro```, Dias a data que o membropassou a fazer parte do servidor.
+append_bad_word ```palavra```, Adiciona a palavra a lista de bloqueio.
+show_bad_words, Mostra a lista de palavras bloqueadas.
+repository, Mostra o repositorio do nickbot no Github.
+help_commands, Mostra todos os Commands do nickbot
