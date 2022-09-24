@@ -1,6 +1,6 @@
-import discord
 from typing import NoReturn
 
+import discord
 from discord.ext import commands
 
 from config import BAD_WORDS_FILENAME

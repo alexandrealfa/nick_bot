@@ -1,7 +1,7 @@
 from discord.ext.commands import Bot
-from config import ENABLE_CHANNELS, BAD_WORDS_FILENAME
 
-from helper import validate_word, insert_word
+from config import BAD_WORDS_FILENAME, ENABLE_CHANNELS
+from helper import insert_word, validate_word
 
 
 def init(bot: Bot):
@@ -22,7 +22,7 @@ def init(bot: Bot):
         """
         fiz esse bloco if: pra conseguir capturar o conteúdo completo da mensagem, visto que, caso coverta em um
          command ele pegara sempre a primeira palavra da frase, sendo que o intuito da funcionalidade é analizar
-         a frase digitada pelo usuário e sendo ela, unica ou composta, e incluir no repositorio de palavras proibidas.
+         a frase digitada pelo usuário, sendo ela unica ou composta, e incluir no repositorio de palavras proibidas.
         """
         if splited_message[0] == '--append_bad_word':
             insert_word(BAD_WORDS_FILENAME, 'bad_words', ' '.join(splited_message[1:]))

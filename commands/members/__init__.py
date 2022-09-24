@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
-from config import ETERNAL_ROLES, ALLOWED_ROLES
+
 from authorization import check_member
+from config import ALLOWED_ROLES, ETERNAL_ROLES
 
 
 @commands.command()

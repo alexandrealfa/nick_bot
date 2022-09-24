@@ -1,7 +1,7 @@
-from typing import Tuple, NoReturn
+import csv
+from typing import NoReturn, Tuple
 
 import pandas as pd
-import csv
 
 
 def get_words(filename: str) -> list:
