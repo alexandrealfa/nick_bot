@@ -17,7 +17,7 @@ ENABLE_CHANNELS = {
     },
     'ajuda': {
         'ids': 'all',
-        'message': '```Ola, digite --help para saber em que podemos lhe ajudar ?```'
+        'message': '```Ola, digite --help para saber em que podemos lhe ajudar!.```'
     }
 }
 

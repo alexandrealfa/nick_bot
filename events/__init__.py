@@ -36,6 +36,8 @@ def init(bot: Bot):
             if message.author == bot.user:
                 return
 
+            await validate_messager(current_message, channel)
+
             valid, err_message = validate_word(BAD_WORDS_FILE, current_message)
 
             if valid:
@@ -44,20 +46,23 @@ def init(bot: Bot):
 
                 return
 
-            valid_message = [
-                word for word in ENABLE_CHANNELS.get('all_words')
-                if current_message.lower().startswith(word)
-            ]
-
-            if not valid_message:
-                return
-
-            if c_message := ENABLE_CHANNELS.get(valid_message[0]):
-                if c_message.get('ids') == 'all' or str(channel.id) in c_message.get('ids'):
-                    await channel.send(c_message.get('message'))
-
         except:
             await channel.send('Tivemos um erro ao tentar processar sua solicitação, por favor, tente novamente!.')
 
         finally:
             await bot.process_commands(message)
+
+
+async def validate_messager(current_message, channel):
+
+    valid_message = [
+        word for word in ENABLE_CHANNELS.get('all_words')
+        if current_message.lower().startswith(word)
+    ]
+
+    if not valid_message:
+        return
+
+    if c_message := ENABLE_CHANNELS.get(valid_message[0]):
+        if c_message.get('ids') == 'all' or str(channel.id) in c_message.get('ids'):
+            await channel.send(c_message.get('message'))

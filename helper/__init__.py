@@ -5,8 +5,8 @@ import csv
 
 
 def get_words(filename: str) -> list:
-    if data := pd.read_csv(filename):
-        return list(data.bad_words.to_list())
+    data = pd.read_csv(filename)
+    return list(data.bad_words.to_list())
 
 
 def validate_word(filename: str, current_word: str) -> Tuple[bool, str]:
