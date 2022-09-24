@@ -1,7 +1,9 @@
+import discord
 from discord.ext.commands import Bot
 
 from config import BAD_WORDS_FILENAME, ENABLE_CHANNELS
 from helpers.csv_helper import insert_word, validate_word
+from helpers.embed import EmbedHelper
 
 
 def init(bot: Bot):
@@ -11,8 +13,23 @@ def init(bot: Bot):
 
     @bot.event
     async def on_member_join(member):
+        print(member.guild.system_channel)
         if channel := member.guild.system_channel:
-            await channel.send(f"{member.mention} welcome to server!.")
+            fields = [{
+                "name": ":loudspeaker: Fique atento!",
+                "value":"Temos Diversas Salas, fique a vontade e faça novas amizades. Obrigado por entrar no nosso servidor",
+                "inline": False
+            }]
+            ebd = EmbedHelper(
+                f"{member.nick} | Bem-vindo(a)!.",
+                discord.Color.green(),
+                description=f"Olá! {member.mention}! Você acabou de entrar no servidor {member.guild}, aqui você poderá interagir e fazer diversas amizades!",
+                thumb=member.avatar_url,
+                fields=fields,
+                image='https://media.discordapp.net/attachments/728741178186399839/840963544907907092/bem-vindo_ao_study_community_br.gif?width=1092&height=614'
+            )
+            ebd.generate_embed()
+            await channel.send(embed=ebd.embed)
 
     @bot.event
     async def on_message(message):
