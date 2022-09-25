@@ -9,8 +9,8 @@ from config import ALLOWED_ROLES, ETERNAL_ROLES
 async def joined(ctx: discord, member: discord.Member = None):
     """Says when a member joined."""
     if member:
-        await ctx.send(f"{member.name} joined in {member.joined_at.strftime('%d/%m/%y')}")
+        await ctx.send(f"{member.mention} joined in {member.joined_at.strftime('%d/%m/%y')}")
 
         return
 
-    await ctx.send(f"{ctx.author.name} joined in {ctx.author.joined_at.strftime('%d/%m/%y')}")
+    await ctx.send(f"{ctx.author.mention} joined in {ctx.author.joined_at.strftime('%d/%m/%y')}")
