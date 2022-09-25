@@ -24,7 +24,7 @@ def validate_word(filename: str, current_word: str) -> Tuple[bool, str]:
 
     for word in words:
         if word in file_words:
-            return True, 'O texto que você digitou contém uma palavra proibida nesse canal!.'
+            return True, f'O texto que você digitou contém uma palavra proibida nesse canal!.'
 
     return False, ''
 

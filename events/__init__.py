@@ -99,7 +99,7 @@ def init(bot: Bot):
 
             if valid:
                 await message.delete()
-                await channel.send(err_message)
+                await channel.send(f"{message.author.mention}, {err_message}")
 
                 return
 
