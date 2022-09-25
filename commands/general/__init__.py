@@ -31,6 +31,9 @@ async def ping(ctx: discord, message=None) -> NoReturn:
         return
 
     if content := int(message):
+        if content > 10:
+            content = 10
+
         for i in range(content):
             await ctx.send('test')
 
@@ -126,4 +129,10 @@ async def show_bad_words(ctx: discord) -> NoReturn:
 @cmd.command()
 async def append_bad_word(ctx: discord, message=None) -> NoReturn:
     """Adiciona a palavra a lista de bloqueio"""
+    pass
+
+
+@cmd.command()
+async def show_welcome_message(ctx: discord, message=None) -> NoReturn:
+    """Mostra a mensagem de boas-vindas"""
     pass

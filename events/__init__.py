@@ -1,6 +1,7 @@
 import discord
 from discord.ext.commands import Bot
 
+import commands
 from config import BAD_WORDS_FILENAME, ENABLE_CHANNELS
 from helpers.book_scraping_helper import BookAPI
 from helpers.csv_helper import insert_word, validate_word
@@ -34,6 +35,12 @@ def init(bot: Bot):
 
     @bot.event
     async def on_message(message):
+        if message.content.lower() == '--show_welcome_message':
+            await on_member_join(message.author)
+            await bot.process_commands(message)
+
+            return
+
         current_message, channel = message.content.lower(), message.channel
         splited_message = str(current_message).split(' ')
 
@@ -43,6 +50,11 @@ def init(bot: Bot):
          a frase digitada pelo usuário, sendo ela unica ou composta, e incluir no repositorio de palavras proibidas.
         """
         if splited_message[0] == '--append_bad_word':
+            if splited_message[0].startswith('--'):
+                await bot.process_commands(message)
+
+                return
+
             insert_word(BAD_WORDS_FILENAME, 'bad_words', ' '.join(splited_message[1:]))
 
             await channel.send('Nova palavra adicionada a lista de bloqueio')

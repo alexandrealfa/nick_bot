@@ -10,3 +10,4 @@ commands, Mostra todos os Commands do nickbot
 nasa_apod, Mostra o APOD(Astronomy Picture of the Day) da nasa.
 nasa_apod```year-mouth-day```, Mostra o APOD(Astronomy Picture of the Day) do dia selecionado.
 search_book, Mostra os 3 resultados para o livro pesquisado.
+show_welcome_message, Mostra a mensagem de boas-vindas.
