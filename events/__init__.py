@@ -49,7 +49,7 @@ def init(bot: Bot):
          a frase digitada pelo usuário, sendo ela unica ou composta, e incluir no repositorio de palavras proibidas.
         """
         if splited_message[0] == '--append_bad_word':
-            if splited_message[0].startswith('--'):
+            if splited_message[1].startswith('--'):
                 await bot.process_commands(message)
 
                 return
