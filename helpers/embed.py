@@ -1,6 +1,6 @@
-from discord import Embed as Ebd
-
 from typing import Dict, NoReturn, Union
+
+from discord import Embed as Ebd
 
 
 class EmbedHelper:

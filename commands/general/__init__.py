@@ -1,3 +1,4 @@
+from datetime import date as dt
 from typing import NoReturn
 
 import discord
@@ -5,11 +6,9 @@ from discord.ext import commands as cmd
 
 from config import BAD_WORDS_FILENAME, COMMANDS_FILENAME
 from helpers.book_scraping_helper import BookAPI
-from helpers.csv_helper import get_words, get_all_rows
+from helpers.csv_helper import get_all_rows, get_words
 from helpers.embed import EmbedHelper
 from helpers.nasa_api_helper import NasaAPI
-
-from datetime import date as dt
 
 
 @cmd.command()

@@ -1,5 +1,6 @@
-import requests
 from datetime import date as dt
+
+import requests
 
 from config import NASA_API_KEY
 

@@ -1,7 +1,8 @@
 from discord.ext.commands import Bot
 
-from commands.general import (append_bad_word, hi, ping, repository,
-                              show_bad_words, commands, nasa_apod, search_book, show_welcome_message)
+from commands.general import (append_bad_word, commands, hi, nasa_apod, ping,
+                              repository, search_book, show_bad_words,
+                              show_welcome_message)
 from commands.members import joined
 
 

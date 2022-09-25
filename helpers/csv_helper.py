@@ -1,5 +1,5 @@
 import csv
-from typing import NoReturn, Tuple, Any
+from typing import Any, NoReturn, Tuple
 
 import pandas as pd
 
