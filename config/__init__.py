@@ -5,6 +5,7 @@ env = Env()
 env.read_env()
 
 TOKEN = env("DISCORD_TOKEN")
+NASA_API_KEY = env("NASA_API_KEY")
 
 ETERNAL_ROLES = {"moderadores", "bots", "Admin"}
 

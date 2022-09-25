@@ -1,24 +1,28 @@
 from typing import NoReturn
 
 import discord
-from discord.ext import commands
+from discord.ext import commands as cmd
 
 from config import BAD_WORDS_FILENAME, COMMANDS_FILENAME
+from helpers.book_scraping_helper import BookAPI
 from helpers.csv_helper import get_words, get_all_rows
 from helpers.embed import EmbedHelper
+from helpers.nasa_api_helper import NasaAPI
+
+from datetime import date as dt
 
 
-@commands.command()
+@cmd.command()
 async def hi(ctx: discord) -> NoReturn:
     """Diga ola ao nick."""
 
-    if name := ctx.author.name:
+    if name := ctx.author.mention:
         await ctx.send(f'ola, {name}')
 
     return
 
 
-@commands.command()
+@cmd.command()
 async def ping(ctx: discord, message=None) -> NoReturn:
     """Verifica se o bot está ativo."""
     if not message or len(message) == 0:
@@ -31,7 +35,7 @@ async def ping(ctx: discord, message=None) -> NoReturn:
             await ctx.send('test')
 
 
-@commands.command()
+@cmd.command()
 async def repository(ctx: discord) -> NoReturn:
     """Mostra o repositorio do nickbot no Github."""
     author = {
@@ -54,8 +58,35 @@ async def repository(ctx: discord) -> NoReturn:
     return
 
 
-@commands.command()
-async def help_commands(ctx: discord) -> NoReturn:
+@cmd.command()
+async def nasa_apod(ctx: discord, message=None) -> NoReturn:
+    """Mostra o APOD(Astronomy Picture of the Day) da nasa."""
+    if result := NasaAPI().fetchAPOD(date=message):
+        author = {
+            'name': f"Image Copyright | {result.get('copyright') or 'nasa'}",
+            'url': 'https://www.nasa.gov/'
+        }
+        ebd = EmbedHelper(
+            title=result.get('date'),
+            color=discord.Color.green(),
+            url=result.get('hdurl') or result.get('url'),
+            author=author,
+            description=result.get('explanation'),
+            image=result.get('hdurl') or result.get('url')
+        )
+        ebd.generate_embed()
+
+        await ctx.send(embed=ebd.embed)
+
+
+@cmd.command()
+async def search_book(ctx: discord, message=None) -> NoReturn:
+    """Mostra os 3 resultados para o livro pesquisado."""
+    pass
+
+
+@cmd.command()
+async def commands(ctx: discord) -> NoReturn:
     """Mostra todos os Commands do nick bot"""
 
     if all_commands := get_all_rows(COMMANDS_FILENAME):
@@ -73,7 +104,7 @@ async def help_commands(ctx: discord) -> NoReturn:
     return
 
 
-@commands.command()
+@cmd.command()
 async def show_bad_words(ctx: discord) -> NoReturn:
     """Mostra a lista de palavras bloqueadas."""
 
@@ -92,7 +123,7 @@ async def show_bad_words(ctx: discord) -> NoReturn:
     return
 
 
-@commands.command()
+@cmd.command()
 async def append_bad_word(ctx: discord, message=None) -> NoReturn:
     """Adiciona a palavra a lista de bloqueio"""
     pass

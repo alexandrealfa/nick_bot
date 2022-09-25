@@ -2,6 +2,7 @@ import discord
 from discord.ext.commands import Bot
 
 from config import BAD_WORDS_FILENAME, ENABLE_CHANNELS
+from helpers.book_scraping_helper import BookAPI
 from helpers.csv_helper import insert_word, validate_word
 from helpers.embed import EmbedHelper
 
@@ -47,6 +48,45 @@ def init(bot: Bot):
             await channel.send('Nova palavra adicionada a lista de bloqueio')
             await bot.process_commands(message)
 
+            return
+
+        if splited_message[0] == '--search_book':
+            book_name = ' '.join(splited_message[1:])
+
+            if result := BookAPI().fetch_book_api(book_name):
+                for book in result.get("items")[:3]:
+                    author = {}
+                    try:
+                        book.get('volumeInfo').get('imageLinks')
+                        book.get('volumeInfo').get('imageLinks').get('thumbnail')
+
+                    except (AttributeError, KeyError):
+                        book['volumeInfo']['imageLinks'] = {}
+                        book['volumeInfo']['imageLinks']['thumbnail'] = "https://books.google.com.br/googlebooks/images/no_cover_thumb.gif"
+                        book['volumeInfo']['imageLinks']['smallThumbnail'] = "https://books.google.com.br/googlebooks/images/no_cover_thumb.gif"
+
+                    author = {
+                        'name': " ".join(book.get('volumeInfo').get('authors') or []),
+                        'url': book.get('volumeInfo').get('imageLinks').get('smallThumbnail')
+                    }
+
+                    ebd = EmbedHelper(
+                        title=book.get('volumeInfo').get('title'),
+                        color=discord.Color.green(),
+                        url=book.get('volumeInfo').get('infoLink'),
+                        author=author,
+                        description=book.get('volumeInfo').get('description'),
+                        image=book.get('volumeInfo').get('imageLinks').get('thumbnail')
+                    )
+                    ebd.generate_embed()
+
+                    await channel.send(embed=ebd.embed)
+
+                await bot.process_commands(message)
+
+                return
+
+            await channel.send('Não localizamos resultado para a busca realizada.')
             return
 
         try:
