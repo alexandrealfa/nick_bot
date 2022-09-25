@@ -15,7 +15,6 @@ def init(bot: Bot):
 
     @bot.event
     async def on_member_join(member):
-        print(member.guild.system_channel)
         if channel := member.guild.system_channel:
             fields = [{
                 "name": ":loudspeaker: Fique atento!",
